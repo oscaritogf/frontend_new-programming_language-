@@ -37,10 +37,10 @@ const ResultViewer: React.FC<ResultViewerProps> = ({ html, css, resultado, tipo 
 
   return (
     <div className="h-full w-full border border-gray-300 rounded-md overflow-hidden">
-      <div className="bg-gray-100 px-4 py-2 border-b border-gray-300">
-        <h3 className="font-medium text-gray-700">Resultados</h3>
+      <div className="bg-gray-700 px-4 py-2 border-b border-gray-300">
+        <h3 className="font-medium text-gray-100">Resultados</h3>
         {tipo && resultado && (
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-gray-100">
             Tipo: {tipo}, Valor: {resultado}
           </div>
         )}
@@ -50,7 +50,7 @@ const ResultViewer: React.FC<ResultViewerProps> = ({ html, css, resultado, tipo 
         {(html || css) ? (
           <iframe 
             ref={iframeRef}
-            className="w-full h-full bg-white" 
+            className="w-full h-full bg-black" 
             title="Resultado"
             sandbox="allow-scripts"
           />
@@ -59,7 +59,7 @@ const ResultViewer: React.FC<ResultViewerProps> = ({ html, css, resultado, tipo 
             {resultado ? (
               <pre className="whitespace-pre-wrap">{resultado}</pre>
             ) : (
-              <div className="text-gray-400 italic">No hay resultados para mostrar</div>
+              <div className="text-gray-700 italic">No hay resultados para mostrar</div>
             )}
           </div>
         )}

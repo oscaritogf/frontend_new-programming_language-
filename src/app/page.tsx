@@ -72,10 +72,10 @@ export default function Home() {
     <main className="min-h-screen bg-gray-50 p-4">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-800 mb-6">
-          Intérprete de Lenguaje en Español
+          SandBoxLanCode
         </h1>
         
-        <div className="bg-white rounded-lg shadow-md p-4 mb-6">
+        <div className="text-gray-800 rounded-lg shadow-md p-4 mb-6">
           <div className="flex gap-2 mb-4">
             <button
               onClick={ejecutarCodigo}
@@ -89,7 +89,7 @@ export default function Home() {
               <button className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium py-2 px-4 rounded-md">
                 Ejemplos
               </button>
-              <div className="dropdown-menu hidden absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-md z-10">
+              <div className="dropdown-menu hidden absolute right-0 mt-2 w-64 text-gray-600 shadow-lg rounded-md z-10">
                 {Object.entries(ejemplos).map(([key, value]) => (
                   <button
                     key={key}
@@ -135,27 +135,27 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div>
               <h3 className="font-bold text-gray-700">Variables</h3>
-              <pre className="bg-gray-50 p-2 rounded text-sm">variable nombre = valor;</pre>
+              <pre className="bg-gray-600 p-2 rounded text-sm">variable nombre = valor;</pre>
             </div>
             <div>
               <h3 className="font-bold text-gray-700">Condicionales</h3>
-              <pre className="bg-gray-50 p-2 rounded text-sm">si (condicion) {`{\n  // código\n}`}</pre>
+              <pre className="bg-gray-600 p-2 rounded text-sm">si (condicion) {`{\n  // código\n}`}</pre>
             </div>
             <div>
               <h3 className="font-bold text-gray-700">Bucles</h3>
-              <pre className="bg-gray-50 p-2 rounded text-sm">mientras (condicion) {`{\n  // código\n}`}</pre>
+              <pre className="bg-gray-600 p-2 rounded text-sm">mientras (condicion) {`{\n  // código\n}`}</pre>
             </div>
             <div>
               <h3 className="font-bold text-gray-700">Funciones</h3>
-              <pre className="bg-gray-50 p-2 rounded text-sm">funcion nombre(param) {`{\n  devolver valor;\n}`}</pre>
+              <pre className="bg-gray-600 p-2 rounded text-sm">funcion nombre(param) {`{\n  devolver valor;\n}`}</pre>
             </div>
             <div>
               <h3 className="font-bold text-gray-700">HTML</h3>
-              <pre className="bg-gray-50 p-2 rounded text-sm">div(h1("Título"), p("Texto"));</pre>
+              <pre className="bg-gray-600 p-2 rounded text-sm">div(h1("Título"), p("Texto"));</pre>
             </div>
             <div>
               <h3 className="font-bold text-gray-700">Listas</h3>
-              <pre className="bg-gray-50 p-2 rounded text-sm">variable lista = [1, 2, 3];</pre>
+              <pre className="bg-gray-600 p-2 rounded text-sm">variable lista = [1, 2, 3];</pre>
             </div>
           </div>
         </div>

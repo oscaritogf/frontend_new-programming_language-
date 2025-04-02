@@ -20,8 +20,8 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, initialValue = '' }) 
 
   return (
     <div className="h-full w-full border border-gray-600 rounded-md overflow-hidden">
-      <div className="bg-gray-100 px-4 py-2 border-b border-gray-500 flex justify-between items-center">
-        <h3 className="font-medium text-gray-700">Editor de Código</h3>
+      <div className="bg-gray-700 px-4 py-2 border-b border-gray-500 flex justify-between items-center">
+        <h3 className="font-medium text-gray-100">Editor de Código</h3>
         <div className="text-sm text-gray-700">{code.length} caracteres</div>
       </div>
       <CodeMirror
