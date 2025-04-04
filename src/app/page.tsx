@@ -59,14 +59,6 @@ export default function Home() {
     }
   };
 
-  // Ejemplos de código para empezar
-  const ejemplos = {
-    basico: 'variable mensaje = "Hola mundo";\nmostrar(mensaje);',
-    condicional: 'variable edad = 18;\n\nsi (edad >= 18) {\n  mostrar("Eres mayor de edad");\n} sino {\n  mostrar("Eres menor de edad");\n}',
-    bucle: 'variable contador = 0;\n\nmientras (contador < 5) {\n  mostrar(contador);\n  contador = contador + 1;\n}',
-    funcion: 'funcion sumar(a, b) {\n  devolver a + b;\n}\n\nmostrar(sumar(5, 3));',
-    html: 'variable titulo = "Mi Página";\nvariable contenido = div(h1(titulo), p("Este es un párrafo de ejemplo"));'
-  };
 
   return (
     <main className="min-h-screen bg-gray-50 p-4">
