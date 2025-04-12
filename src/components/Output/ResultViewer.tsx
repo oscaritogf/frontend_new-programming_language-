@@ -1,8 +1,6 @@
-// src/components/Output/ResultViewer.tsx
 'use client';
 
-import React from 'react';
-import { useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 
 interface ResultViewerProps {
   html?: string;
@@ -14,6 +12,7 @@ interface ResultViewerProps {
 const ResultViewer: React.FC<ResultViewerProps> = ({ html, css, resultado, tipo }) => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
+  // Efecto para mostrar html + css en iframe
   useEffect(() => {
     if (iframeRef.current && (html || css)) {
       const iframeDoc = iframeRef.current.contentDocument;
@@ -34,6 +33,13 @@ const ResultViewer: React.FC<ResultViewerProps> = ({ html, css, resultado, tipo 
       }
     }
   }, [html, css]);
+
+  // Efecto para imprimir en consola la respuesta del backend
+  useEffect(() => {
+    if (resultado) {
+      console.log("Respuesta del backend:", resultado);
+    }
+  }, [resultado]);
 
   return (
     <div className="h-full w-full border border-gray-300 rounded-md overflow-hidden">

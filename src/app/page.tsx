@@ -76,6 +76,54 @@ export default function Home() {
   const [activeDocIndex, setActiveDocIndex] = useState<number>(0);
   const [showTypewriter, setShowTypewriter] = useState<boolean>(true);
   const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
+  const [showCopyModal, setShowCopyModal] = useState(false);
+  const [copiedExampleName, setCopiedExampleName] = useState("");
+
+  // Ejemplos de código para copiar
+  const [examples] = useState([
+    {
+      name: "FUNCIÓN SALUDAR",
+      code: `funcion saludar(nombre: cadena){ 
+  mostrar('Hola, ' + nombre)
+}
+llamado saludar('Steph')`
+    },
+    {
+      name: "FUNCIÓN SUMAR",
+      code: `funcion sumar(a: entero, b:entero) : 
+entero { a + b  }
+llamado sumar(5, 4)`
+    },
+    {
+      name: "CONDICIONAL",
+      code: `variable n = 1
+variable m = 2
+si(n == m){
+  mostrar("mismo valor")
+}
+sino{
+  mostrar("valores diferentes")
+}`
+    },
+    {
+      name: "PARENTESIS ANIDADOS",
+      code: `( 10 )( 8 + 4 )( 2 + (5 - 4) )`
+    },
+    {
+      name: "LISTAS",
+      code: `variable lista = [1, 2, 3, 4, 5];
+mostrar(lista)`
+    }
+  ]);
+
+  // Ejemplos de código para ejecución inicial
+  const ejemplos = {
+    basico: 'variable mensaje = "Hola mundo";\nmostrar(mensaje);',
+    condicional: 'variable edad = 18;\n\nsi (edad >= 18) {\n  mostrar("Eres mayor de edad");\n} sino {\n  mostrar("Eres menor de edad");\n}',
+    bucle: 'variable contador = 0;\n\nmientras (contador < 5) {\n  mostrar(contador);\n  contador = contador + 1;\n}',
+    funcion: 'funcion sumar(a, b) {\n  devolver a + b;\n}\n\nmostrar(sumar(5, 3));',
+    html: 'variable titulo = "Mi Página";\nvariable contenido = div(h1(titulo), p("Este es un párrafo de ejemplo"));'
+  };
 
   const handleCodeChange = (newCode: string) => {
     setCode(newCode);
@@ -130,19 +178,7 @@ export default function Home() {
     }
   };
 
-  // Ejemplos de código para empezar
-  const ejemplos = {
-    basico: 'variable mensaje = "Hola mundo";\nmostrar(mensaje);',
-    condicional: 'variable edad = 18;\n\nsi (edad >= 18) {\n  mostrar("Eres mayor de edad");\n} sino {\n  mostrar("Eres menor de edad");\n}',
-    bucle: 'variable contador = 0;\n\nmientras (contador < 5) {\n  mostrar(contador);\n  contador = contador + 1;\n}',
-    funcion: 'funcion sumar(a, b) {\n  devolver a + b;\n}\n\nmostrar(sumar(5, 3));',
-    html: 'variable titulo = "Mi Página";\nvariable contenido = div(h1(titulo), p("Este es un párrafo de ejemplo"));'
-  };
-
-  const handleEjemploClick = (ejemploCode: string) => {
-    setCode(ejemploCode);
-    setIsDropdownOpen(false);
-  };
+  // Removed unused handleEjemploClick function
 
   // Ejemplos de documentación con código
   const documentacionEjemplos = [
@@ -253,7 +289,6 @@ export default function Home() {
             </button>
            
             <div className="relative">
-              {/* Dropdown para ejemplos
               <button 
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)} 
                 className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-medium py-2 px-4 rounded-md shadow-md transition-all duration-300 flex items-center hover:shadow-lg transform hover:-translate-y-1 active:translate-y-0"
@@ -263,17 +298,25 @@ export default function Home() {
                 </svg>
                 Ejemplos
               </button>
-               */}
               
               {isDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-200 shadow-lg rounded-md z-10 border border-gray-200 dark:border-gray-700 animate-fadeIn">
-                  {Object.entries(ejemplos).map(([key, value]) => (
+                  {examples.map((example) => (
                     <button
-                      key={key}
-                      className="block w-full text-left px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 border-b border-gray-100 dark:border-gray-700 last:border-0 transition-all duration-200 hover:pl-6"
-                      onClick={() => handleEjemploClick(value)}
+                      key={example.name}
+                      className="block w-full text-left px-4 py-3 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 border-b border-gray-100 dark:border-gray-700 last:border-0 transition-all duration-200 hover:pl-6 flex justify-between items-center"
+                      onClick={() => {
+                        navigator.clipboard.writeText(example.code);
+                        setCopiedExampleName(example.name);
+                        setShowCopyModal(true);
+                        setTimeout(() => setShowCopyModal(false), 2000);
+                        setIsDropdownOpen(false);
+                      }}
                     >
-                      {key.charAt(0).toUpperCase() + key.slice(1)}
+                      {example.name}
+                      <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                      </svg>
                     </button>
                   ))}
                 </div>
@@ -392,6 +435,24 @@ export default function Home() {
               </svg>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">¡FUNCIONA!</h3>
               <p className="text-gray-600 dark:text-gray-300">Tu código se ha ejecutado correctamente</p>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {/* Modal de copia exitosa */}
+      {showCopyModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="absolute inset-0 bg-opacity-50 backdrop-blur-sm animate-fadeIn"></div>
+          <div className="relative bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl max-w-md mx-auto transform transition-all duration-300 animate-scale">
+            <div className="text-center">
+              <svg className="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">¡Copiado!</h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                El ejemplo <span className="font-semibold text-blue-600 dark:text-blue-400">{copiedExampleName}</span> se ha copiado al portapapeles
+              </p>
             </div>
           </div>
         </div>

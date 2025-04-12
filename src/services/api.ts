@@ -30,8 +30,9 @@ export const interpretarCodigo = async (codigo: string): Promise<InterpretarResp
       },
       body: JSON.stringify({ codigo }),
     });
-
+    
     return await response.json();
+    
   } catch (error) {
     console.error('Error interpretando código:', error);
     return {
