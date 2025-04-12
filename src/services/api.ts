@@ -1,6 +1,6 @@
 // src/services/api.ts
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://app.eps.rf.gd';
 
 export interface InterpretarResponse {
   estado: 'exito' | 'error';
@@ -16,6 +16,7 @@ export interface InterpretarResponse {
 
 export interface ASTResponse {
   estado: 'exito' | 'error';
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ast?: any;
   error?: string;
 }

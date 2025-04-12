@@ -7,7 +7,7 @@ interface ASTNode {
   tipo: string;
   linea?: number;
   columna?: number;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 interface ASTViewerProps {
@@ -63,7 +63,7 @@ const NodeComponent: React.FC<{ node: ASTNode; depth?: number }> = ({
                             {typeof item === 'object' && item !== null ? (
                               <NodeComponent node={item} depth={depth + 1} />
                             ) : (
-                              <span className="text-green-600">"{item}"</span>
+                              <span className="text-green-600">&quot;{item}&quot;</span>
                             )}
                           </div>
                         ))}
@@ -75,7 +75,11 @@ const NodeComponent: React.FC<{ node: ASTNode; depth?: number }> = ({
                 return (
                   <div key={key} className="mt-1">
                     <span className="text-purple-600">{key}:</span>
-                    <NodeComponent node={value} depth={depth + 1} />
+                    {typeof value === 'object' && value !== null && 'tipo' in value ? (
+                      <NodeComponent node={value as ASTNode} depth={depth + 1} />
+                    ) : (
+                      <span className="text-red-500">Invalid ASTNode</span>
+                    )}
                   </div>
                 );
               }
